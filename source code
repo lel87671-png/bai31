@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Tính tổng các số chia hết cho 3</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .form-group { margin-bottom: 15px; }
+        input { padding: 8px; width: 200px; display: block; margin-top: 5px; }
+        button { padding: 8px 15px; cursor: pointer; font-weight: bold; }
+        #result { margin-top: 20px; font-size: 1.1em; color: blue; }
+    </style>
+</head>
+<body>
+
+    <h2>Tính tổng các số chia hết cho 3 trong khoảng</h2>
+    
+    <form onsubmit="handleSubmit(event)">
+        <div class="form-group">
+            <label for="startNum">Số đầu:</label>
+            <input type="number" id="startNum" required>
+        </div>
+        <div class="form-group">
+            <label for="endNum">Số cuối:</label>
+            <input type="number" id="endNum" required>
+        </div>
+        <button type="submit">Tính tổng</button>
+    </form>
+
+    <p id="result">Kết quả sẽ hiển thị ở đây...</p>
+
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault();
+            
+            // Lấy giá trị số đầu và số cuối từ input
+            let start = parseInt(document.getElementById("startNum").value);
+            let end = parseInt(document.getElementById("endNum").value);
+            let resultEl = document.getElementById("result");
+
+            // Kiểm tra tính hợp lệ
+            if (isNaN(start) || isNaN(end)) {
+                resultEl.innerText = "Vui lòng nhập đầy đủ số hợp lệ!";
+                return;
+            }
+
+            // Đảm bảo khoảng từ nhỏ đến lớn
+            if (start > end) {
+                let temp = start;
+                start = end;
+                end = temp;
+            }
+
+            // Vòng lặp tính tổng các số chia hết cho 3
+            let sum = 0;
+            for (let i = start; i <= end; i++) {
+                if (i % 3 === 0) {
+                    sum += i;
+                }
+            }
+
+            // Hiển thị kết quả
+            resultEl.innerHTML = `Tổng các số chia hết cho 3 từ <b>${start}</b> đến <b>${end}</b> là: <strong style="color: green;">${sum}</strong>`;
+        }
+    </script>
+
+</body>
+</html>
